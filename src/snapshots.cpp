@@ -1,5 +1,7 @@
+/*
+ * Convert a movie to a set of still frames
+ */
 #include <iostream>
-#include <sys/time.h>
 #include <stdio.h>
 
 #include "opencv2/core/core.hpp"
@@ -28,16 +30,7 @@ int main(int argc, char* argv[])
          return -1;
     }
 
-	Mat fgmask;
-	GpuMat d_fgmask;
-	GpuMat d_frame(frame);
-	MOG2_GPU mog2;
-
-	mog2(d_frame, d_fgmask);
-
     namedWindow("vid", CV_WINDOW_AUTOSIZE);
-
-	st = getTickCount();
 
     int frame_number = 0;
     bool done = false;
@@ -49,8 +42,6 @@ int main(int argc, char* argv[])
 			break;
 
         imshow("vid", frame);
-
-		dt = (double)(getTickCount() - st)/getTickFrequency();
 
         // Wait 1ms or for any key
         int key;
