@@ -20,7 +20,7 @@ and the fcn variant of Caffe.
     zip_neg.py              Zip a directory with a single file
     
     scripts:
-    cats.sh                 Simple script to run fcn segmentations on files coming in from FPT
+    cats.sh                 Simple script to run fcn segmentations on files coming in from FTP
     dclean.sh               Monitor an FTP directory
     
     src:
