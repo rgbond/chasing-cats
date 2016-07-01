@@ -9,7 +9,7 @@ dclean.sh &
 date > caffe.out
 while true
 do
-    find /caffe/drive_rc/inbound -type f -name '*.jpg' -print | sort > tmp1
+    find /caffe/inbound -type f -name '*.jpg' -print | sort > tmp1
     if [ -s tmp1 ]
     then
         echo running caffe
