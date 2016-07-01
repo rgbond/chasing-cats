@@ -21,9 +21,9 @@ do
             pascal_histo $result > tmp2
             mask_out.py $yard $result
             ybn=`basename $yard`
-            ydn=/caffe/drive_rc/outbound/raw/$ybn
+            ydn=/caffe/outbound/raw/$ybn
             rbn=`basename $result`
-            rdn=/caffe/drive_rc/outbound/raw/$rbn
+            rdn=/caffe/outbound/raw/$rbn
             echo $ybn `cat tmp2` >> counts.out
             mv $yard $ydn
             mv $result $rdn
@@ -33,21 +33,21 @@ do
                 i=`echo $line | awk '{print $1}'`
                 case "$i" in
                     cat|bird)
-                        ln $ydn /caffe/drive_rc/outbound/$i
-                        ln $rdn /caffe/drive_rc/outbound/$i
+                        ln $ydn /caffe/outbound/$i
+                        ln $rdn /caffe/outbound/$i
                         echo "keeping $ybn: $i"
                         hr=`date +%H`
                         if [ $hr -lt 8 ] || [ $hr -ge 20 ]
                         then
                             date
                             echo "running sprinkler"
-                            /caffe/drive_rc/photon/sprinkle.sh
+                            /caffe/photon/sprinkle.sh
                         fi
                         ;;
                     aeroplane|bicycle|boat|bottle|bus|car|chair|\
                     table|dog|horse|motorbike|person|sofa|train|tvmonitor)
-                        ln $ydn /caffe/drive_rc/outbound/$i
-                        ln $rdn /caffe/drive_rc/outbound/$i
+                        ln $ydn /caffe/outbound/$i
+                        ln $rdn /caffe/outbound/$i
                         echo "keeping $ybn: $i"
                         ;;
                     none|pottedplant|sheep|cow|\
