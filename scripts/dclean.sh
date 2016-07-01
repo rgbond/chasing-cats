@@ -1,6 +1,6 @@
 #!/bin/sh
 # monitors the ftp directory for innbound images
-# Any file found gets the permissions fixed and moved to /caffe/drive_rc/inbound
+# Any file found gets the permissions fixed and moved to /caffe/inbound
 m="/caffe/camera_home/FI9800P_00626E61E0D6/snap"
 d="/caffe/inbound"
 while true
