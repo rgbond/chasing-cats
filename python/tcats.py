@@ -19,9 +19,9 @@ import cv2
 smallest_blob = 1400
 
 # Has a set of jpegs and pngs processed by tbatch_infer.py
-classified = "/caffe/drive_rc/classified"
+classified = "/caffe/classified"
 # Where the files go next
-outbound = "/caffe/drive_rc/outbound"
+outbound = "/caffe/outbound"
 raw = p.join(outbound, "raw")
 # How to kick off the photon
 sprinkle = "/home/rgb/bin/sprinkle.sh"
