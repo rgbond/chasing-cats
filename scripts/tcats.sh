@@ -1,4 +1,6 @@
 #!/bin/bash
+# Starts the whole process.
+# 
 cd /caffe/fcn*
 echo staring dclean
 dclean.sh &

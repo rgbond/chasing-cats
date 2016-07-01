@@ -1,5 +1,8 @@
 #!/usr/bin/python
-# Usage: show_seg src.jpg seg.png 
+# Usage: tcats..py
+# Processes files that have been segmented by the FCN network
+# Get the labels for the segmented items, saves the images we care about
+# turns on the sprinkler for cats and dogs
 #
 
 import sys
@@ -26,21 +29,15 @@ sprinkle = "/home/rgb/bin/sprinkle.sh"
 count_log = "/caffe/fcn.berkeleyvision.org/counts.out"
 
 # Labels for everything the neural net can recognize. Indexes matter in this list
-labels = ["none", "truck_0", "truck_22.5", "truck_45", "truck_67.5",
-          "truck_90", "truck_112.5", "truck_135", "truck_157.5",
-          "truck_180", "truck_202.5", "truck_225", "truck_247.5",
-          "truck_270", "truck_292.5", "truck_315", "truck_337.5",
-          "cat", "dog", "person"]
+labels = [ "none", "aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair",
+           "cow", "table", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa",
+           "train", "tvmonitor"]
 
 # Turn the sprinkler on these guys
 sprinkle_list = ["cat", "dog"]
 
 # Keep these images around in outbound/item
-keep_list = ["truck_0", "truck_22.5", "truck_45", "truck_67.5",
-             "truck_90", "truck_112.5", "truck_135", "truck_157.5",
-             "truck_180", "truck_202.5", "truck_225", "truck_247.5",
-             "truck_270", "truck_292.5", "truck_315", "truck_337.5",
-             "cat", "dog", "person"]
+keep_list = ["cat", "dog", "person"]
 
 def get_list(png_fn):
     im = Image.open(png_fn)
@@ -48,7 +45,7 @@ def get_list(png_fn):
     indices = []
     items = []
     counts = []
-    for i in range(256):
+    for i in range(len(labels)):
         if histo[i] > 0:
             indices += [i]
             items += [labels[i]]
@@ -56,12 +53,14 @@ def get_list(png_fn):
     return indices, items, counts
 
 while True:
+    # Get a list of files
     flist = os.listdir(classified)
     flist.sort()
     if flist == None or len(flist) < 2:
         time.sleep(0.25)
         continue
     while len(flist) > 2:
+        # Should be a .jpg and a .png with matching file names
         jpeg_fn = flist.pop(0)
         jpeg_full_src = p.join(classified, jpeg_fn)
         jpeg_base, jpeg_ext = p.splitext(jpeg_fn)
@@ -77,13 +76,17 @@ while True:
             os.remove(jpeg_full_src)
             os.remove(png_full_src)
             continue
+        # Figure out where to save the images - everything goes to outbound/raw
         jpeg_full_dest = p.join(raw, jpeg_fn)
         png_full_dest = p.join(raw, png_fn)
+        # Move to outbound/raw
         os.rename(jpeg_full_src, jpeg_full_dest)
         os.rename(png_full_src, png_full_dest)
+        # Find the segmented pixels
         indices, items, counts = get_list(png_full_dest)
         log_line = jpeg_fn + ' '
         num_items = len(items)
+        # Do something with items we care about
         for i in range(num_items):
             index = indices[i]
             item = items[i]
@@ -101,7 +104,8 @@ while True:
             log_line += item + " " + str(index) + " " + str(count)
             if i < num_items - 1:
                 log_line += " "
+        # Log it
         with open(count_log, "a") as log:
             log.write(log_line + '\n')
-        # spawn and forget
+        # spawn and forget a process to convert the png to a file we can see
         subprocess.Popen(["mask_out.py", jpeg_full_dest, png_full_dest])

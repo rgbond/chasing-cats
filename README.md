@@ -22,9 +22,17 @@ and the fcn variant of Caffe.
     scripts:
     cats.sh                 Simple script to run fcn segmentations on files coming in from FTP
     dclean.sh               Monitor an FTP directory
+    tcats.sh                The one I use
     
     src:
     bright.cpp              Brighten images
     cropper.cpp             Crop images to 227 x 227 pixels
     example.cpp             Simple GPU example used to debug opencv builds
     snapshots.cpp           Convert a movie to single frames
+
+    fcn:                    Modified files from the Shellhammer github
+    infer.py                Saves a file in addition to processing a file
+    batch_infer.py          Processes a bunch of files from the command line
+    tbatch_infer.py         The one I use to process inbound cat images
+    voc-fcn32s:
+        deploy.prototxt     A deployment version of trainval.prototxt
