@@ -23,6 +23,10 @@ and the fcn variant of Caffe.
     cats.sh                 Simple script to run fcn segmentations on files coming in from FTP
     dclean.sh               Monitor an FTP directory
     tcats.sh                The one I use
+    spon                    Disable the sprinkler
+    spoff                   Enable the sprinkler
+    sprinkle.sh             Start the sprinkler
+    sprinkle_off.sh         Stop the sprinkler
     
     src:
     bright.cpp              Brighten images

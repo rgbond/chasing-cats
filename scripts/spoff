@@ -1,0 +1,3 @@
+#!/bin/bash
+echo Sprinkler disabled
+touch /home/rgb/bin/sprinkler_off
