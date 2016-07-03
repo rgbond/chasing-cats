@@ -11,6 +11,7 @@ and the fcn variant of Caffe.
     count_pascal_mat.py     Counts classified pixels in a Pascal Context .mat file
     count_pascal.py         Coutns classified pixels in a Pascal Context .png file
     get_png_palette.py      Gets the pallete from a .png file
+    last10.py               Show the last 10 shots from the camera at 1/2 res
     mask_out.py             Masks out and colorizes the classified pixels in an image
     mat2png.py              Convert a Pascal Context .mat file to .png
     movie.py                Spin through a bunch of images on the command line
