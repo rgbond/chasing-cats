@@ -4,6 +4,9 @@ Jetson cat chasing
 A collection of utilities useful for working with segmented images
 and the fcn variant of Caffe.
 
+    photon:
+    cat_sprinkler.cpp       Firmware for the photon
+        
     python:
     count_pascal_mat.py     Counts classified pixels in a Pascal Context .mat file
     count_pascal.py         Coutns classified pixels in a Pascal Context .png file
