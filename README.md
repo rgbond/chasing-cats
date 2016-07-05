@@ -1,8 +1,8 @@
 # chasing-cats
-Jetson cat chasing: Turn on the lawn sprinkler when a neural net sees a cat
+Jetson cat chasing: Turn on the lawn sprinkler when a neural net sees a cat.
 
 A collection of utilities useful for working with segmented images
-and the fcn variant of Caffe and the code I use for the system.
+and the fcn variant of Caffe.
 
     photon:
     cat_sprinkler.cpp       Firmware for the photon
