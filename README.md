@@ -38,6 +38,7 @@ for a description of the system.
     bright.cpp              Brighten images
     cropper.cpp             Crop images to 227 x 227 pixels
     example.cpp             Simple GPU example used to debug opencv builds
+    extract_fg.cpp          Foreground extraction utility
     snapshots.cpp           Convert a movie to single frames
 
     fcn:                    Modified files from the Shellhammer github
