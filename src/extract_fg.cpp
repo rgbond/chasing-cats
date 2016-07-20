@@ -47,13 +47,26 @@ string dest_jpg;    // A copy of photo_filename
 string dest_png;    // The segmented image
 string dest_dir;
 string seg_dir;
+int start_seg_value = cat_seg_value;
 
 void parse_options(int argc, char *argv[])
 {
     int c;
 
-    while ((c = getopt(argc, argv, "sv")) != -1) {
+    while ((c = getopt(argc, argv, "aeosv")) != -1) {
         switch (c) {
+            case 'a':
+                printf("Start with cat segs\n");
+                start_seg_value = cat_seg_value;
+                break;
+            case 'o':
+                printf("Start with dog segs\n");
+                start_seg_value = dog_seg_value;
+                break;
+            case 'e':
+                printf("Start with person segs\n");
+                start_seg_value = person_seg_value;
+                break;
             case 's':
                 use_bg_photo = false;
                 printf("Don't use bg photo\n");
@@ -91,7 +104,7 @@ Mat frame;
 Mat fg_src;
 Mat fg;
 int mag = 4;
-int cur_seg_value = cat_seg_value;
+int cur_seg_value = start_seg_value;
 
 static void grab_background()
 {
@@ -307,14 +320,14 @@ void process_frame()
     Rect to_clear(0, 0, 240, 30);
     fg(to_clear).setTo(Scalar(0));
 
-    // Load fg_src, assuming they are all cat pixels
+    // Load fg_src
     fg_src = Mat::zeros(fg.rows, fg.cols, CV_8UC1);
 
     for (int y = 0; y < fg.rows; y++) {
         for (int x = 0; x < fg.cols; x++) {
             uint8_t c = fg.at<uchar>(y, x);
             if (c >= 250)
-                fg_src.at<uchar>(y, x) = cat_seg_value;
+                fg_src.at<uchar>(y, x) = start_seg_value;
         }
     }
 }
