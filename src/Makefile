@@ -33,7 +33,7 @@ inc += -I/usr/local/caffe/include
 inc += -I/usr/local/cuda-7.5/include
 
 CFLAGS=-g
-UTILS = bright cropper example snapshots
+UTILS = bright cropper example snapshots extract_fg
 
 all: $(UTILS)
 clean:
@@ -54,3 +54,7 @@ cropper.o: cropper.cpp
 	g++ $(CFLAGS) $(inc) -c cropper.cpp
 cropper: cropper.o
 	g++ $(CFLAGS) -o cropper cropper.o $(libs)
+extract_fg.o: extract_fg.cpp
+	g++ $(CFLAGS) $(inc) -c extract_fg.cpp
+extract_fg: extract_fg.o
+	g++ $(CFLAGS) -o extract_fg extract_fg.o $(libs)
