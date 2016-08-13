@@ -42,7 +42,7 @@ toc = time.clock()
 print toc-tic
 
 # out = net.blobs['score'].data[0].argmax(axis=0)
-out = net.blobs['my_score'].data[0].argmax(axis=0)
+out = net.blobs['score'].data[0].argmax(axis=0)
 out_8 = np.empty_like(out, dtype=np.uint8)
 np.copyto(out_8, out, casting='unsafe')
 img = Image.fromarray(out_8)
