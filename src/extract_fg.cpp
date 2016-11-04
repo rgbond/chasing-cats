@@ -47,7 +47,7 @@ string dest_jpg;    // A copy of photo_filename
 string dest_png;    // The segmented image
 string dest_dir;
 string seg_dir;
-int start_seg_value = cat_seg_value;
+int cur_seg_value = cat_seg_value;
 
 void parse_options(int argc, char *argv[])
 {
@@ -57,15 +57,15 @@ void parse_options(int argc, char *argv[])
         switch (c) {
             case 'a':
                 printf("Start with cat segs\n");
-                start_seg_value = cat_seg_value;
+                cur_seg_value = cat_seg_value;
                 break;
             case 'o':
                 printf("Start with dog segs\n");
-                start_seg_value = dog_seg_value;
+                cur_seg_value = dog_seg_value;
                 break;
             case 'e':
                 printf("Start with person segs\n");
-                start_seg_value = person_seg_value;
+                cur_seg_value = person_seg_value;
                 break;
             case 's':
                 use_bg_photo = false;
@@ -104,7 +104,6 @@ Mat frame;
 Mat fg_src;
 Mat fg;
 int mag = 4;
-int cur_seg_value = start_seg_value;
 
 static void grab_background()
 {
@@ -327,7 +326,7 @@ void process_frame()
         for (int x = 0; x < fg.cols; x++) {
             uint8_t c = fg.at<uchar>(y, x);
             if (c >= 250)
-                fg_src.at<uchar>(y, x) = start_seg_value;
+                fg_src.at<uchar>(y, x) = cur_seg_value;
         }
     }
 }
